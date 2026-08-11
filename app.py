@@ -6,8 +6,10 @@ import re
 from fastapi.templating import Jinja2Templates # UI
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi import FastAPI, Request
 
 app = FastAPI(title="Text Summarizer App", description="Text Summarization using T5", version="1.0")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 model = T5ForConditionalGeneration.from_pretrained("./saved_summary_model")
 tokenizer = T5Tokenizer.from_pretrained("./saved_summary_model")
@@ -69,4 +71,8 @@ async def summarize(dialogue_input: DialogueInput):
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse(
+    request=request,
+    name="index.html",
+    context={"request": request}
+)
