@@ -1,4 +1,4 @@
-# Simple Dialogue Summarizer (T5 + FastAPI)
+# Dialogue Summarizer (T5 + FastAPI)
 
 A lightweight web application that uses a fine-tuned **T5-small** model to generate concise summaries from chat dialogues or text transcripts. The project combines a Hugging Face transformer model with a minimal **FastAPI** backend and a clean HTML/CSS/JS frontend.
 
